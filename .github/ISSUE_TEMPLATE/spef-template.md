@@ -22,4 +22,5 @@ assignees: ''
 *Décrire concrètement de quelle manière l'objectif sera atteint. On peut présenter les différentes fonctionnalités qui doivent être développées ou améliorée pour que le produit atteigne l'objectif ou les nouvelles fonctionnalités auxquelles l'utilisateurs aura accès pour répondre à son besoin.*
 
 
-*Des références peuvent être incorporées à la spécification via des liens vers des [projets](https://github.com/isogeo/sandbox-python/projects), [dépôts](https://github.com/isogeo/sandbox-python) ou autres ressources évoquées dans la spécification.*
+
+*Bonus : Des références peuvent être incorporées à la spécification via des liens vers des [projets](https://github.com/isogeo/sandbox-python/projects), [dépôts](https://github.com/isogeo/sandbox-python) ou autres ressources évoquées dans la spécification.*

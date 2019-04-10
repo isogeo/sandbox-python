@@ -19,7 +19,7 @@ assignees: ''
 *Présentation du projet : ce que doit permettre de faire le module, le produit, ou l'amélioration développé(e) pour répondre au besoin spécifié.*
 
 ## Description
-*Décrire concrètement de quelle manière l'objectif sera atteint. On peut présenter les différentes fonctionnalités qui doivent être développées ou améliorée pour que le produit atteigne l'objectif ou les nouvelles fonctionnalités auxquelles l'utilisateurs aura accès pour répondre à son besoin.*
+*Description concrète et organisée de la manière dont l'objectif sera atteint. On peut présenter, au sein de sous-parties, les différentes fonctionnalités qui doivent être développées ou améliorée pour que le produit atteigne l'objectif ou les nouvelles fonctionnalités auxquelles l'utilisateurs aura accès pour répondre à son besoin.*
 
 
 

@@ -2,7 +2,7 @@
 name: 'Graphique (MdR TkIt) '
 about: Modèle de ticket pour les tâches 'Graphiques' identifiées après SPEF
 title: "[GRAPH]"
-labels: graph, new task
+labels: new task
 assignees: ''
 
 ---

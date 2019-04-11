@@ -12,14 +12,20 @@ from tkinter import *
 from isogeo_pysdk import Isogeo, IsogeoUtils, __version__
 utils = IsogeoUtils()
 
-
 class filtreFrame(Frame):
-    def __init__(self, parent):
+    def __init__(self, parent, champ):
         Frame.__init__(self, parent, width="5c", height="2.5c")
         self.grid_propagate(0)
         self.pack()
         self.rowconfigure(1, minsize = "0.5c")
 
+        self.lbl = Label(self, text=champ)
+        self.lbl.grid(row=0, sticky="w")
+        # Menu enfant
+        self.menuBtn = Menubutton(self, width = 30, relief = "ridge")
+        self.menuBtn.menu = Menu(self.menuBtn, tearoff=0)
+        self.menuBtn['menu'] = self.menuBtn.menu
+        self.menuBtn.grid(row=2)
 
 class Interface(Frame): #Une classe qui hérite de la classe Frame
     
@@ -57,67 +63,32 @@ class Interface(Frame): #Une classe qui hérite de la classe Frame
                 self.Filtres_frame.columnconfigure(int(dimension[3]), minsize = mep_filtreFrame_dict[dimension])
 
         # Frame parent Fournisseur
-        self.Fourn_frame = filtreFrame(self.Filtres_frame)
+        self.Fourn_frame = filtreFrame(self.Filtres_frame, champ="Fournisseur")
         self.Fourn_frame.grid(row=1, column=1)
-        # Label enfant
-        self.Fourn_lbl = Label(self.Fourn_frame, text="Fournisseur")
-        self.Fourn_lbl.grid(row=0, sticky="w")
-        # Menu enfant
-        self.Fourn_menuBtn = Menubutton(self.Fourn_frame, width = 30, relief = "ridge")
-        self.Fourn_menuBtn.menu = Menu(self.Fourn_menuBtn, tearoff=0)
-        self.Fourn_menuBtn['menu'] = self.Fourn_menuBtn.menu
-        self.Fourn_menuBtn.grid(row=2)
-
+        
         # Frame parent Groupe de travail
-        self.GrpTrav_frame = filtreFrame(self.Filtres_frame)
+        self.GrpTrav_frame = filtreFrame(self.Filtres_frame, champ ="Groupe de travail")
         self.GrpTrav_frame.grid(row=1, column=3)
-        # Label enfant
-        self.GrpTrav_lbl = Label(self.GrpTrav_frame, text="Groupe de travail")
-        self.GrpTrav_lbl.grid(row=0, sticky="w")
-        # Menu enfant
-        self.GrpTrav_menuBtn = Menubutton(self.GrpTrav_frame, width = 30, relief = "ridge")
-        self.GrpTrav_menuBtn.menu = Menu(self.GrpTrav_menuBtn, tearoff=0)
-        self.GrpTrav_menuBtn['menu'] = self.GrpTrav_menuBtn.menu
-        self.GrpTrav_menuBtn.grid(row=2)
-
+        
         # Frame parent Type
-        self.Type_frame = filtreFrame(self.Filtres_frame)
+        self.Type_frame = filtreFrame(self.Filtres_frame, champ ="Type")
         self.Type_frame.grid(row=3, column=1)
-        # Label enfant
-        self.Type_lbl = Label(self.Type_frame, text="Type")
-        self.Type_lbl.grid(row=0, sticky="w")
-        # Menu enfant
-        self.Type_menuBtn = Menubutton(self.Type_frame, width = 30, relief = "ridge")
-        self.Type_menuBtn.menu = Menu(self.Type_menuBtn, tearoff=0)
-        self.Type_menuBtn['menu'] = self.Type_menuBtn.menu
-        self.Type_menuBtn.grid(row=2)
+        
 
         # Frame parent Mot-clef
-        self.KeyW_frame = filtreFrame(self.Filtres_frame)
+        self.KeyW_frame = filtreFrame(self.Filtres_frame, champ ="Mot-Clef")
         self.KeyW_frame.grid(row=3, column=3)
-        # Label enfant
-        self.KeyW_lbl = Label(self.KeyW_frame, text="Mot-Clef")
-        self.KeyW_lbl.grid(row=0, sticky="w")
-        # Menu enfant
-        self.KeyW_menuBtn = Menubutton(self.KeyW_frame, width = 30, relief = "ridge")
-        self.KeyW_menuBtn.menu = Menu(self.KeyW_menuBtn, tearoff=0)
-        self.KeyW_menuBtn['menu'] = self.KeyW_menuBtn.menu
-        self.KeyW_menuBtn.grid(row=2)
+       
 
         # Frame parent Format
-        self.Format_frame = filtreFrame(self.Filtres_frame)
+        self.Format_frame = filtreFrame(self.Filtres_frame, champ="Format")
         self.Format_frame.grid(row=5, column=1)
-        # Label enfant
-        self.Format_lbl = Label(self.Format_frame, text="Format")
-        self.Format_lbl.grid(row=0, sticky="w")
-        # Menu enfant
-        self.Format_menuBtn = Menubutton(self.Format_frame, width = 30, relief = "ridge")
-        self.Format_menuBtn.menu = Menu(self.Format_menuBtn, tearoff=0)
-        self.Format_menuBtn['menu'] = self.Format_menuBtn.menu
-        self.Format_menuBtn.grid(row=2)
+       
 
         # Frame parent Bouton Lancement
-        self.RunBtn_frame = filtreFrame(self.Filtres_frame)
+        self.RunBtn_frame = Frame(self.Filtres_frame, width="5c", height="2.5c")
+        self.RunBtn_frame.grid_propagate(0)
+        self.RunBtn_frame.rowconfigure(1, minsize = "0.5c")
         self.RunBtn_frame.grid(row=5, column=3)
         self.RunBtn_frame.rowconfigure(0, minsize = "1c")
         self.RunBtn_frame.columnconfigure(0, minsize = "5c")

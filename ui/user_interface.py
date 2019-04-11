@@ -14,11 +14,12 @@ utils = IsogeoUtils()
 
 class filtreFrame(Frame):
     def __init__(self, parent, champ):
+        # Frame parent
         Frame.__init__(self, parent, width="5c", height="2.5c")
         self.grid_propagate(0)
         self.pack()
         self.rowconfigure(1, minsize = "0.5c")
-
+        # Label enfant
         self.lbl = Label(self, text=champ)
         self.lbl.grid(row=0, sticky="w")
         # Menu enfant

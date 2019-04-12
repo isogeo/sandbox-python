@@ -16,6 +16,10 @@ from tkinter import ttk
 #from isogeo_pysdk import Isogeo, IsogeoUtils, __version__
 #utils = IsogeoUtils()
 
+# #############################################################################
+# ########## Classes ###############
+# ##################################
+
 class filtreFrame(Frame):
     def __init__(self, parent, champ):
         # Frame parent

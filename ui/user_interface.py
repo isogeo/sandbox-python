@@ -7,13 +7,14 @@
 
 #Standard library
 from tkinter import *
+from tkinter import ttk
 
 # Package
 from isogeo_pysdk import Isogeo, IsogeoUtils, __version__
 utils = IsogeoUtils()
 
 class filtreFrame(Frame):
-    def __init__(self, parent, champ):
+    def __init__(self, parent, champ, options):
         # Frame parent
         Frame.__init__(self, parent, width="5c", height="2.5c")
         self.grid_propagate(0)
@@ -22,11 +23,9 @@ class filtreFrame(Frame):
         # Label enfant
         self.lbl = Label(self, text=champ)
         self.lbl.grid(row=0, sticky="w")
-        # Menu enfant
-        self.menuBtn = Menubutton(self, width = 30, relief = "ridge")
-        self.menuBtn.menu = Menu(self.menuBtn, tearoff=0)
-        self.menuBtn['menu'] = self.menuBtn.menu
-        self.menuBtn.grid(row=2)
+        #Combobox enfant
+        self.cbbox=ttk.Combobox(self, values=options)
+        self.cbbox.grid(row=2)
 
 class Interface(Frame): #Une classe qui hérite de la classe Frame
     
@@ -62,36 +61,38 @@ class Interface(Frame): #Une classe qui hérite de la classe Frame
                 self.Filtres_frame.rowconfigure(int(dimension[3]), minsize = mep_filtreFrame_dict[dimension])
             else :
                 self.Filtres_frame.columnconfigure(int(dimension[3]), minsize = mep_filtreFrame_dict[dimension])
-
+        
         # Frame parent Fournisseur
-        self.Fourn_frame = filtreFrame(self.Filtres_frame, champ="Fournisseur")
+        self.Fourn_options = ["Fournisseur"]
+        self.Fourn_frame = filtreFrame(self.Filtres_frame, champ ="Fournisseur", options = self.Fourn_options)
         self.Fourn_frame.grid(row=1, column=1)
         
         # Frame parent Groupe de travail
-        self.GrpTrav_frame = filtreFrame(self.Filtres_frame, champ ="Groupe de travail")
+        self.GrpTrav_options = ["Groupe de travail"]
+        self.GrpTrav_frame = filtreFrame(self.Filtres_frame, champ = "Groupe de travail", options = self.GrpTrav_options)
         self.GrpTrav_frame.grid(row=1, column=3)
         
         # Frame parent Type
-        self.Type_frame = filtreFrame(self.Filtres_frame, champ ="Type")
+        self.Type_options = ["Type"]
+        self.Type_frame = filtreFrame(self.Filtres_frame, champ ="Type", options = self.Type_options)
         self.Type_frame.grid(row=3, column=1)
         
-
         # Frame parent Mot-clef
-        self.KeyW_frame = filtreFrame(self.Filtres_frame, champ ="Mot-Clef")
+        self.KeyW_options = ["Mot-clef"]
+        self.KeyW_frame = filtreFrame(self.Filtres_frame, champ ="Mot-Clef", options = self.KeyW_options)
         self.KeyW_frame.grid(row=3, column=3)
        
-
         # Frame parent Format
-        self.Format_frame = filtreFrame(self.Filtres_frame, champ="Format")
+        self.Format_options = ["Format"]
+        self.Format_frame = filtreFrame(self.Filtres_frame, champ="Format", options = self.Format_options)
         self.Format_frame.grid(row=5, column=1)
        
-
         # Frame parent Bouton Lancement
         self.RunBtn_frame = Frame(self.Filtres_frame, width="5c", height="2.5c")
         self.RunBtn_frame.grid_propagate(0)
-        self.RunBtn_frame.rowconfigure(1, minsize = "0.5c")
         self.RunBtn_frame.grid(row=5, column=3)
         self.RunBtn_frame.rowconfigure(0, minsize = "1c")
+        self.RunBtn_frame.rowconfigure(1, minsize = "0.5c")
         self.RunBtn_frame.columnconfigure(0, minsize = "5c")
         # Bouton enfant
         self.Run_btn = Button(self.RunBtn_frame, text = "Lancer l'inventaire")
@@ -111,7 +112,7 @@ class Interface(Frame): #Une classe qui hérite de la classe Frame
         self.Result_btn = Label(self.Result_frame, textvariable = chnResult, justify="left")
         self.Result_btn.grid(column = 1, row =1, sticky="w")
 
-        
+
 fenetre = Tk()
 fenetre.title("Inventaire filtré des métadonnées")
 interface = Interface(fenetre)

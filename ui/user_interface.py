@@ -29,7 +29,7 @@ class filtreFrame(Frame):
         self.cbbox.grid(row=2)
 
     def setOptions(self, new_options):
-        self.cbbox=ttk.Combobox(self, values=new_options)
+        self.cbbox["values"]=new_options
 
 class Interface(Frame): #Une classe qui hérite de la classe Frame
     

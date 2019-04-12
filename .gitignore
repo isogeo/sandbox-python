@@ -108,3 +108,4 @@ venv.bak/
 # CUSTOM ######################################################
 
 client_secrets*.json
+.vscode/settings.json

@@ -8,11 +8,11 @@
 # ########## Libraries #############
 # ##################################
 
-#Standard library
+# Standard library
 from tkinter import *
 from tkinter import ttk
 
-# Package
+# 3rd party
 #from isogeo_pysdk import Isogeo, IsogeoUtils, __version__
 #utils = IsogeoUtils()
 

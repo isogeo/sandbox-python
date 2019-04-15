@@ -1,3 +1,6 @@
+# -*- coding: UTF-8 -*-
+#! python3
+
 """ Script contenant les fonctions permettant de se connecter à l'API isogeo en lecture
  """
 

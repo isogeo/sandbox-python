@@ -1,3 +1,6 @@
+# -*- coding: UTF-8 -*-
+#! python3
+
 """ Script présentant des exemples d'utilisation du module de requête via l'API isogeo
  """
 

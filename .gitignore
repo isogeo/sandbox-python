@@ -108,5 +108,3 @@ venv.bak/
 
 client_secrets*.json
 .vscode/settings.json
-api_search*.json
-api_search*

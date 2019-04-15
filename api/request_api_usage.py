@@ -20,6 +20,12 @@ from request_api_module import API_auth, API_request_Maker, get_Filters_Values
 # ##################################
 dir_file = "/".join(__file__.split("/")[:-1])
 
+# start authenticatiob
+auth_file = API_auth("{}/client_secrets.json".format(dir_file))
+api_credentials = utils.credentials_loader(auth_file)
+isogeo = Isogeo(client_id=api_credentials.get("client_id"), client_secret=api_credentials.get("client_secret"))
+token = isogeo.connect()
+
 # Un dictionnaire pour la transition entre les termes retournés par la requetes et ceux utilisés dans l'interface
 trad_Filtres = {"Mot-clef":"keyword",
                     "Groupe de travail":"owner",

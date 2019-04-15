@@ -104,6 +104,7 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+
 # CUSTOM ######################################################
 
 client_secrets*.json

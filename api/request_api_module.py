@@ -36,4 +36,4 @@ class isogeo_API(Isogeo): #Une classe qui hérite de la classe Isogeo
           else :
                search = self.isogeo.search(self.token, whole_share = 0, page_size = 0, augment=0, tags_as_dicts = 1)
           # retourne les valeurs des champs ainsi que le nombre de métadonnées filtrées
-          return search.get("tags"), search.get("total") 
+          return search.get("tags"), search.get("total")

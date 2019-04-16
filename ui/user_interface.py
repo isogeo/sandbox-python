@@ -35,9 +35,6 @@ class filtreFrame(Frame):
         self.cbbox=ttk.Combobox(self, values=self.options)
         self.cbbox.grid(row=2)
 
-    def setOptions(self, new_options):
-        self.cbbox.config(values=new_options)
-        #self.cbbox["values"]=new_options
 
 class Interface(Frame): #Une classe qui hérite de la classe Frame
     
@@ -112,14 +109,7 @@ class Interface(Frame): #Une classe qui hérite de la classe Frame
         self.Result_frame.rowconfigure(0, minsize = "0.5c")
         self.Result_frame.columnconfigure(0, minsize = "0.5c")
         # Texte enfant
-        chnResult=StringVar()
-        chnResult.set("0 métadonnées correspondantes")
-        self.Result_btn = Label(self.Result_frame, textvariable = chnResult, justify="left")
+        self.chnResult=StringVar()
+        self.chnResult.set("0 métadonnées correspondantes")
+        self.Result_btn = Label(self.Result_frame, textvariable = self.chnResult, justify="left")
         self.Result_btn.grid(column = 1, row =1, sticky="w")
-
-
-fenetre = Tk()
-fenetre.title("Inventaire filtré des métadonnées")
-interface = Interface(fenetre)
-
-interface.mainloop()

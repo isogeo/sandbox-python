@@ -91,15 +91,15 @@ class Interface(Frame): #Une classe qui hérite de la classe Frame
         self.Format_frame.grid(row=5, column=1)
        
         # Frame parent Bouton Lancement
-        self.RunBtn_frame = Frame(self.Filtres_frame, width="5c", height="2.5c")
-        self.RunBtn_frame.grid_propagate(0)
-        self.RunBtn_frame.grid(row=5, column=3)
-        self.RunBtn_frame.rowconfigure(0, minsize = "1c")
-        self.RunBtn_frame.rowconfigure(1, minsize = "0.5c")
-        self.RunBtn_frame.columnconfigure(0, minsize = "5c")
+        self.ResetBtn_frame = Frame(self.Filtres_frame, width="5c", height="2.5c")
+        self.ResetBtn_frame.grid_propagate(0)
+        self.ResetBtn_frame.grid(row=5, column=3)
+        self.ResetBtn_frame.rowconfigure(0, minsize = "1c")
+        self.ResetBtn_frame.rowconfigure(1, minsize = "0.5c")
+        self.ResetBtn_frame.columnconfigure(0, minsize = "4c")
         # Bouton enfant
-        self.Run_btn = Button(self.RunBtn_frame, text = "Lancer l'inventaire")
-        self.Run_btn.grid(row =1, column=0, sticky="ew")
+        self.Reset_btn = Button(self.ResetBtn_frame, text = "Reset")
+        self.Reset_btn.grid(row =1, column=0, sticky="ew")
 
         #RESULTAT DE L'INVENTAIRE
         # Frame parent
@@ -111,5 +111,5 @@ class Interface(Frame): #Une classe qui hérite de la classe Frame
         # Texte enfant
         self.chnResult=StringVar()
         self.chnResult.set("0 métadonnées correspondantes")
-        self.Result_btn = Label(self.Result_frame, textvariable = self.chnResult, justify="left")
-        self.Result_btn.grid(column = 1, row =1, sticky="w")
+        self.Result_lbl = Label(self.Result_frame, textvariable = self.chnResult, justify="left")
+        self.Result_lbl.grid(column = 1, row = 1, sticky="w")

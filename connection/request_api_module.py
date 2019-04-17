@@ -32,8 +32,8 @@ class isogeo_API(Isogeo): #Une classe qui hérite de la classe Isogeo
      # Méthode permettant d'effectuer les différents types de requête à l'API
      def request_Maker(self, filter_request = 1, filter_query = ""):
           if filter_request == 1:
-               search = self.isogeo.search(self.token, whole_share = 0, page_size = 0, augment=0, tags_as_dicts = 1, query = filter_query)
+               search = self.isogeo.search(self.token, whole_share = 0, page_size = 0, augment = 0, tags_as_dicts = 1, query = filter_query)
           else :
-               search = self.isogeo.search(self.token, whole_share = 0, page_size = 0, augment=0, tags_as_dicts = 1)
+               search = self.isogeo.search(self.token, whole_share = 0, page_size = 0, augment = 0, tags_as_dicts = 1)
           # retourne les valeurs des champs ainsi que le nombre de métadonnées filtrées
-          return search.get("tags"), search.get("total")
+          return search.get("tags"), search.get("total") 

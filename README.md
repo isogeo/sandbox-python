@@ -16,6 +16,16 @@ Sandbox-python est un **environnement de formation** permettant notamment de fix
 
 Acquérir des compétences et connaissances nécessaires au **développement du plugin isogeo pour QGIS3**.
 
+## Projet
+
+Dans le but d'atteindre les objectifs de formation, un **moteur de recherche** faisant appel à l'**API isogeo** en lecture a été déveoppé dans ce dépôt.
+
 ## Quickstart
 
-> TO DOC
+* **Reproduit l'environnement** décrit dans le [[Wiki](https://github.com/isogeo/sandbox-python/wiki/Environnement).
+
+* Importer les dossiers `api` et `ui` ainsi que le fichier `main_search_engine.py` et les stocker dans le **même répertoire**.
+
+* Ajouter le **fichier `.json` d'authentification** Isogeo au dossier `api` (au même niveau que le fichier `api_client.py`).
+
+* **Exécuter le script** du fichier `main_search_engine.py` dans un IDE (Visual Studio Code de préférence).

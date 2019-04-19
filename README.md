@@ -10,7 +10,7 @@ Sandbox-python est un **environnement de formation** permettant notamment de fix
 
 * **GitHub** : L'objectif premier de la formation et de **découvrir et d'acquérir certaines pratiques de développeurs** en évoluant dans cette environnement.
 
-* **Python** : L'objectif secondaire constitue la finalité de la formation : la **montée en puissance sur python** dans deux domaines particuliers (interface utilisateur et API isogéo)
+* **Python** : L'objectif secondaire constitue la finalité de la formation : la **montée en puissance sur python** dans deux domaines particuliers (interface utilisateur et API isogéo).
 
 ## Finalité
 

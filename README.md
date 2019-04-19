@@ -22,7 +22,7 @@ Dans le but d'atteindre les objectifs de formation, un **moteur de recherche** f
 
 ## Quickstart
 
-* **Reproduit l'environnement** décrit dans le [[Wiki](https://github.com/isogeo/sandbox-python/wiki/Environnement).
+* **Reproduit l'environnement** décrit dans le [Wiki](https://github.com/isogeo/sandbox-python/wiki/Environnement).
 
 * Importer les dossiers `api` et `ui` ainsi que le fichier `main_search_engine.py` et les stocker dans le **même répertoire**.
 

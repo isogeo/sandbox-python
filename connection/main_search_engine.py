@@ -9,24 +9,24 @@
 # ##################################
 
 # Modules
-from request_api_module import *
-from user_interface import *
+from ui import ui_objs
+from api import api_client
 
 # ############################################################################
 # ########## Class #################
 # ##################################
 
-class isogeo_SE():
+class isogeo_searchEngine():
     def __init__(self, api, ui):
         # ###### Attributes ########
         self.api = api
         self.ui = ui
         self.field_dict = {
-                            self.ui.Fourn_frame.cbbox : "providers",
-                            self.ui.GrpTrav_frame.cbbox : "owners",
-                            self.ui.Type_frame.cbbox : "types",
-                            self.ui.KeyW_frame.cbbox : "keywords",
-                            self.ui.Format_frame.cbbox : "formats"
+                            self.ui.fourn_frame.cbbox : "providers",
+                            self.ui.grpTrav_frame.cbbox : "owners",
+                            self.ui.type_frame.cbbox : "types",
+                            self.ui.keyW_frame.cbbox : "keywords",
+                            self.ui.format_frame.cbbox : "formats"
         }
         self.filter_output = {
                             "providers" : "",
@@ -44,7 +44,7 @@ class isogeo_SE():
         self.set_result(self.init_request[1])
         self.fields_setting(input_request = self.init_request)
         self.field_updating()    
-        self.ui.Reset_btn.config(command = self.global_resetting)
+        self.ui.reset_btn.config(command = self.global_resetting)
             
     def set_result(self, result):
         if result > 1:
@@ -89,12 +89,12 @@ class isogeo_SE():
         self.fields_setting(input_request = self.init_request)
         self.set_result(result = self.init_request[1])
 
-api = isogeo_API("client_secrets.json")
+window = ui_objs.Tk()
+window.title("Inventaire filtré des métadonnées")
+ui = ui_objs.interface(window)
 
-fenetre = Tk()
-fenetre.title("Inventaire filtré des métadonnées")
-ui = Interface(fenetre)
+api = api_client.isogeo_API("client_secrets.json")
 
-search_engine = isogeo_SE(api = api, ui = ui)
+search_engine = isogeo_searchEngine(api = api, ui = ui)
 
-fenetre.mainloop()
+window.mainloop()

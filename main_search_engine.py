@@ -37,7 +37,7 @@ class isogeo_searchEngine():
         }
 
         self.init_request = self.api.request_Maker(filter_request = 0)
-        self.result = self.ui.chnResult
+        self.result = self.ui.str_result
         self.query = ""
 
         # ###### Functions ########
@@ -45,6 +45,7 @@ class isogeo_searchEngine():
         self.fields_setting(input_request = self.init_request)
         self.field_updating()    
         self.ui.reset_btn.config(command = self.global_resetting)
+        self.ui.search_box.bind('<Any-Key>', self.free_searching)
             
     def set_result(self, result):
         if result > 1:
@@ -61,8 +62,10 @@ class isogeo_searchEngine():
 
     def set_query(self):
         self.query = ""
+        self.query += "{} ".format(self.ui.search_box.get())
         for output in self.filter_output :
                 self.query += "{} ".format(self.filter_output[output])
+        
 
     def cbbox_callback(self, event, field):
         filter_name = self.field_dict[field]
@@ -82,12 +85,20 @@ class isogeo_searchEngine():
             field.bind('<<ComboboxSelected>>', cbbox_callback_arg)
 
     def global_resetting(self):
+        self.ui.str_search.set("")
         for field in self.field_dict:
             field.set("")
             self.filter_output[self.field_dict[field]] = ""
         self.init_request = self.api.request_Maker(filter_request = 0)
         self.fields_setting(input_request = self.init_request)
-        self.set_result(result = self.init_request[1])
+        self.set_result(result = self.init_request[1])   
+
+    def free_searching(self, event):
+        self.set_query()
+        self.ui.str_result.set(self.query)
+        update_request = self.api.request_Maker(filter_request=1, filter_query=self.query)
+        self.set_result(result=update_request[1])
+        self.fields_setting(input_request=update_request)
 
 window = ui_objs.Tk()
 window.title("Inventaire filtré des métadonnées")

@@ -19,16 +19,16 @@ from tkinter import ttk
 class filterFrame(Frame):
     def __init__(self, parent, field):
         # Frame parent
-        Frame.__init__(self, parent, width = "5.5c", height = "2.5c")
+        Frame.__init__(self, parent, width = "5.5c", height = "2c")
         self.grid_propagate(0)
         self.pack()
         self.rowconfigure(1, minsize = "0.5c")
-        self.columnconfigure(1, minsize = "0.3c")
+        #self.columnconfigure(1, minsize = "0.3c")
         # Label enfant
         self.lbl = Label(self, text = field)
         self.lbl.grid(row = 0, sticky = "w")
         # Combobox enfant
-        self.cbbox = ttk.Combobox(self)
+        self.cbbox = ttk.Combobox(self, width = 22)
         self.cbbox.grid(row = 2)
 
 class interface(Frame): #Une classe qui hérite de la classe Frame
@@ -52,13 +52,29 @@ class interface(Frame): #Une classe qui hérite de la classe Frame
         self.Auth_btn = Button(self.auth_frame, text = "Tester l'Authentification")
         self.Auth_btn.grid(column = 0, row = 0, sticky = "ns")
 
+        # LA ZONE DE RECHERCHE DE TEXTE LIBRE:
+        # Frame Parent
+        self.search_frame = Frame(self, width = "13c", height = "2c")
+        self.search_frame.grid(row = 2)
+        self.search_frame.columnconfigure(0, minsize = "13c")
+        self.search_frame.rowconfigure(0, minsize = "0.5c")
+        self.search_frame.rowconfigure(2, minsize = "0.5c")
+
+        # Zone de texte enfant
+        self.str_search = StringVar()
+        self.search_box = Entry(self.search_frame, textvariable = self.str_search, width = 70) 
+        #self.search_box = Entry(self.search_frame, width=70)
+        self.search_box.grid(row = 1)
+
+
         # LES FILTRES et LANCEMENT
         # Frame parent filtres 
-        self.filters_frame = Frame(self, width = "13c", height = "9.5c")
+        self.filters_frame = Frame(self, width="13c", height="8c")
         self.filters_frame.grid_propagate(0)
-        self.filters_frame.grid(row = 2)
+        self.filters_frame.grid(row = 3)
 
-        filters_frame_grid = {"row0":"1c", "row2":"0.5c", "row4":"0c", "col0":"0.5c", "col4":"0.5c", "col2":"1c"}
+        filters_frame_grid = {"row0": "0.5c", "row2": "0.75c",
+                              "row4": "0.75c", "col0": "1c", "col2": "1.5c", "col4": "0.5c"}
         for dimension in filters_frame_grid:
             if dimension[0:3] == "row":
                 self.filters_frame.rowconfigure(int(dimension[3]), minsize = filters_frame_grid[dimension])
@@ -86,25 +102,24 @@ class interface(Frame): #Une classe qui hérite de la classe Frame
         self.format_frame.grid(row = 5, column = 1)
        
         # Frame parent Bouton Lancement
-        self.resetBtn_frame = Frame(self.filters_frame, width = "5c", height = "2.5c")
+        self.resetBtn_frame = Frame(self.filters_frame, width = "5.5c", height = "2c")
         self.resetBtn_frame.grid_propagate(0)
         self.resetBtn_frame.grid(row = 5, column = 3)
         self.resetBtn_frame.rowconfigure(0, minsize = "1c")
-        self.resetBtn_frame.rowconfigure(1, minsize = "0.5c")
         self.resetBtn_frame.columnconfigure(0, minsize = "4c")
         # Bouton enfant
-        self.reset_btn = Button(self.resetBtn_frame, text = "Reset")
-        self.reset_btn.grid(row = 1, column = 0, sticky = "ew")
+        self.reset_btn = Button(self.resetBtn_frame, text = "Reset", width = 20)
+        self.reset_btn.grid(row = 1, column = 0, sticky = "w")
 
         #RESULTAT DE L'INVENTAIRE
         # Frame parent
-        self.result_frame = Frame(self, width = "13c", height = "2c")
+        self.result_frame = Frame(self, width="13c", height="1c")
         self.result_frame.grid_propagate(0)
-        self.result_frame.grid(row = 3)
+        self.result_frame.grid(row = 4)
         self.result_frame.rowconfigure(0, minsize = "0.5c")
-        self.result_frame.columnconfigure(0, minsize = "0.5c")
+        self.result_frame.columnconfigure(0, minsize = "1c")
         # Texte enfant
-        self.chnResult = StringVar()
-        self.chnResult.set("0 métadonnées correspondantes")
-        self.result_lbl = Label(self.result_frame, textvariable = self.chnResult, justify = "left")
+        self.str_result = StringVar()
+        self.str_result.set("0 métadonnées correspondantes")
+        self.result_lbl = Label(self.result_frame, textvariable = self.str_result, justify = "left")
         self.result_lbl.grid(column = 1, row = 1, sticky = "w")

@@ -22,7 +22,11 @@ Dans le but d'atteindre les objectifs de formation, un **moteur de recherche** f
 
 ## Quickstart
 
-* **Reproduit l'environnement** décrit dans le [Wiki](https://github.com/isogeo/sandbox-python/wiki/Environnement).
+* Installation du package isogeo-pysdk :
+
+```powershell
+pip install isogeo-pysdk
+```
 
 * Importer les dossiers `api` et `ui` ainsi que le fichier `main_search_engine.py` et les stocker dans le **même répertoire**.
 
@@ -30,7 +34,7 @@ Dans le but d'atteindre les objectifs de formation, un **moteur de recherche** f
 
 * **Exécuter le script** suivant dans un IDE (Visual Studio Code de préférence).
 
-``` Python
+```python
 # Import du module permettant de connecter l'interface utilisateur et l'API Isogeo
 # (donne également accès aux modules api_client, ui_objs et tkinter)
 from main_search_engine import *

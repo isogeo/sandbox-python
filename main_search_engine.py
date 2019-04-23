@@ -97,7 +97,7 @@ class isogeo_searchEngine():
     def free_searching(self, event):
         self.set_query()
         self.ui.str_result.set(self.query)
-        update_request = self.api.request_Maker(filter_request=1, filter_query=self.query)
+        update_request = self.api.request_Maker(filter_request = 1, filter_query=self.query)
         self.set_result(result=update_request[1])
         self.fields_setting(input_request=update_request)
 

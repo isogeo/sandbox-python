@@ -1,7 +1,8 @@
 # -*- coding: UTF-8 -*-
 #! python3
 
-""" Script permettant de générer l'interface graphique du moteur de recherche 
+""" Classe permettant d'assembler l'interface générée à partir de ui_objs et l'API Isogeo
+à laquelle on se connecte via api_client. 
  """
 
 # ############################################################################
@@ -45,7 +46,7 @@ class isogeo_searchEngine():
         self.fields_setting(input_request = self.init_request)
         self.field_updating()    
         self.ui.reset_btn.config(command = self.global_resetting)
-        self.ui.search_box.bind('<Any-Key>', self.free_searching)
+        self.ui.search_box.bind('<FocusOut>', self.free_searching)
             
     def set_result(self, result):
         if result > 1:
@@ -100,12 +101,18 @@ class isogeo_searchEngine():
         self.set_result(result=update_request[1])
         self.fields_setting(input_request=update_request)
 
-window = ui_objs.Tk()
-window.title("Inventaire filtré des métadonnées")
-ui = ui_objs.interface(window)
+# ############################################################################
+# ########## Script #################
+# ##################################
 
-api = api_client.isogeo_API("client_secrets.json")
+if __name__ == '__main__':
 
-search_engine = isogeo_searchEngine(api = api, ui = ui)
+    window = ui_objs.Tk()
+    window.title("Inventaire filtré des métadonnées")
+    ui = ui_objs.interface(window)
 
-window.mainloop()
+    api = api_client.isogeo_API("client_secrets.json")
+
+    search_engine = isogeo_searchEngine(api = api, ui = ui)
+
+    window.mainloop()

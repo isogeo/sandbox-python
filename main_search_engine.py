@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #! python3
 
-""" Script permettant de générer l'interface graphique du moteur de recherche 
+""" Script permettant de connecter l'interface graphique et l'API Isogeo
  """
 
 # ############################################################################
@@ -99,6 +99,10 @@ class isogeo_searchEngine():
         update_request = self.api.request_Maker(filter_request=1, filter_query=self.query)
         self.set_result(result=update_request[1])
         self.fields_setting(input_request=update_request)
+
+# ############################################################################
+# ########## Script ################
+# ##################################
 
 window = ui_objs.Tk()
 window.title("Inventaire filtré des métadonnées")

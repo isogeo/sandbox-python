@@ -1,7 +1,8 @@
 # -*- coding: UTF-8 -*-
 #! python3
 
-""" Script contenant les fonctions permettant de se connecter à l'API isogeo en lecture
+""" Script contenantla classe permettant de se connecter à l'API isogeo en lecture
+via un fichier json d'authentification.
  """
 
 # ############################################################################
@@ -16,7 +17,7 @@ from isogeo_pysdk import Isogeo, IsogeoUtils
 utils = IsogeoUtils()
 
 # ############################################################################
-# ########## Classe #############
+# ########## Class #############
 # ##################################
 class isogeo_API(Isogeo): #Une classe qui hérite de la classe Isogeo
      def __init__(self, file_name):

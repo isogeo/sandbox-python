@@ -49,7 +49,7 @@
                 "sha256:f15ef60e38854ae1da9dc352a9a1d2b77b02c38688f28fc7b7f019f871c5f247"
             ],
             "index": "pypi",
-            "version": "==2.20.5"
+            "version": "==2.21.0"
         },
         "requests": {
             "hashes": [

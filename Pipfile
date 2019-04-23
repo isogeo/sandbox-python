@@ -6,7 +6,7 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-isogeo-pysdk = "==2.20.5"
+isogeo-pysdk = "==2.21"
 
 [requires]
 python_version = "3.6"

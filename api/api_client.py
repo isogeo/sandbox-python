@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #! python3
 
-""" Script contenantla classe permettant de se connecter à l'API isogeo en lecture
+""" Classe permettant de se connecter à l'API isogeo en lecture
 via un fichier json d'authentification.
  """
 

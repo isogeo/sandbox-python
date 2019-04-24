@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 #! python3
 
-""" Script permettant de générer l'interface graphique du moteur de recherche 
+""" Classe permettant de générer l'interface graphique du moteur de recherche 
  """
 
 # ############################################################################

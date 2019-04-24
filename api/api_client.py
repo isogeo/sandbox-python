@@ -1,7 +1,8 @@
 # -*- coding: UTF-8 -*-
 #! python3
 
-""" Script contenant les fonctions permettant de se connecter à l'API isogeo en lecture
+""" Script contenantla classe permettant de se connecter à l'API isogeo en lecture
+via un fichier json d'authentification.
  """
 
 # ############################################################################
@@ -16,7 +17,7 @@ from isogeo_pysdk import Isogeo, IsogeoUtils
 utils = IsogeoUtils()
 
 # ############################################################################
-# ########## Classe #############
+# ########## Class #############
 # ##################################
 class isogeo_API(Isogeo): #Une classe qui hérite de la classe Isogeo
      def __init__(self, file_name):
@@ -30,10 +31,10 @@ class isogeo_API(Isogeo): #Une classe qui hérite de la classe Isogeo
           self.token = self.isogeo.connect()
      
      # Méthode permettant d'effectuer les différents types de requête à l'API
-     def request_Maker(self, filter_request = 1, filter_query = ""):
+     def request_Maker(self, filter_request = 0, filter_query = ""):
           if filter_request == 1:
-               search = self.isogeo.search(self.token, whole_share = 0, page_size = 0, augment = 0, tags_as_dicts = 1, query = filter_query)
+               search = self.isogeo.search(whole_share = 0, page_size = 0, augment = 0, tags_as_dicts = 1, query = filter_query)
           else :
-               search = self.isogeo.search(self.token, whole_share = 0, page_size = 0, augment = 0, tags_as_dicts = 1)
+               search = self.isogeo.search(whole_share = 0, page_size = 0, augment = 0, tags_as_dicts = 1)
           # retourne les valeurs des champs ainsi que le nombre de métadonnées filtrées
           return search.get("tags"), search.get("total") 

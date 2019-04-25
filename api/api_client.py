@@ -19,7 +19,7 @@ utils = IsogeoUtils()
 # ############################################################################
 # ########## Class #############
 # ##################################
-class isogeo_API(Isogeo): #Une classe qui hérite de la classe Isogeo
+class isogeo_API(): #Une classe qui hérite de la classe Isogeo
      def __init__(self, file_name):
           # création du chemin vers le fichier d'authentification
           self.json_file = "{}/{}".format("/".join(__file__.split("\\")[:-1]), file_name)

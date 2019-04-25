@@ -19,7 +19,7 @@ from tkinter import ttk
 class filterFrame(Frame):
     def __init__(self, parent, field):
         # Frame parent
-        Frame.__init__(self, parent, width = "5.5c", height = "2c")
+        super().__init__(parent, width = "5.5c", height = "2c")
         self.grid_propagate(0)
         self.pack()
         self.rowconfigure(1, minsize = "0.5c")
@@ -36,8 +36,8 @@ class interface(Frame): #Une classe qui hérite de la classe Frame
     """Notre fenêtre principale.
     Tous les widgets sont stockés comme attributs de cette fenêtre."""
     
-    def __init__(self, window):
-        Frame.__init__(self, window, width = "13c", height = "12c")
+    def __init__(self, master=None):
+        super().__init__(master, width = "13c", height = "12c")
         self.grid_propagate(0)
         self.pack()
         self.rowconfigure(0, minsize = 10)
@@ -123,3 +123,12 @@ class interface(Frame): #Une classe qui hérite de la classe Frame
         self.str_result.set("0 métadonnées correspondantes")
         self.result_lbl = Label(self.result_frame, textvariable = self.str_result, justify = "left")
         self.result_lbl.grid(column = 1, row = 1, sticky = "w")
+
+# ############################################################################
+# ########## Script #################
+# ##################################
+
+if __name__ == '__main__':
+
+    ui = interface()
+    ui.mainloop()

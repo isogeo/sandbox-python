@@ -43,6 +43,6 @@ from main_search_engine import *
 # (Création d'une instance de la classe "isogeo_searchEngine" du module main_search_engine)
 search_engine = isogeo_searchEngine(auth_file_name = "client_secrets.json")
 
-# Affichage de l'interface du moteur de recherche via une méthode hérité de tkinter.Frame
+# Liaison de la console à l'interface graphique
 search_engine.mainloop()
 ```

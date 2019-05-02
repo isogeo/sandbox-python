@@ -17,10 +17,10 @@ from tkinter import ttk
 # ##################################
 
 
-class filterFrame(Frame):
+class FilterFrame(Frame):
 
-    """ Inherited from tkinter.Frame class to generate filter fields' widgets.
-    a tkinter.Combobox and a tkinter.Label with a tkinter.Frame for parent.
+    """ Inherited from tkinter.Frame class to generate filter fields' widgets
+    (a tkinter.Combobox and a tkinter.Label with a tkinter.Frame for parent).
 
     :param parent.widget parent: an interface class's instance
     :param str field: the name of the filter field which widgets will be generated 
@@ -41,7 +41,7 @@ class filterFrame(Frame):
         self.cbbox.grid(row=2)
 
 
-class interface(Frame):  # Une classe qui hérite de la classe Frame
+class Interface(Frame):  # Une classe qui hérite de la classe Frame
 
     """Inherited from tkinter.Frame class.
     Generate the search_engine's user interface. 
@@ -96,24 +96,24 @@ class interface(Frame):  # Une classe qui hérite de la classe Frame
                     int(dimension[3]), minsize=filters_frame_grid[dimension])
 
         # Frame parent Fournisseur
-        self.fourn_frame = filterFrame(self.filters_frame, field="Fournisseur")
+        self.fourn_frame = FilterFrame(self.filters_frame, field="Fournisseur")
         self.fourn_frame.grid(row=1, column=1)
 
         # Frame parent Groupe de travail
-        self.grpTrav_frame = filterFrame(
+        self.grpTrav_frame = FilterFrame(
             self.filters_frame, field="Groupe de travail")
         self.grpTrav_frame.grid(row=1, column=3)
 
         # Frame parent Type
-        self.type_frame = filterFrame(self.filters_frame, field="Type")
+        self.type_frame = FilterFrame(self.filters_frame, field="Type")
         self.type_frame.grid(row=3, column=1)
 
         # Frame parent Mot-clef
-        self.keyW_frame = filterFrame(self.filters_frame, field="Mot-Clef")
+        self.keyW_frame = FilterFrame(self.filters_frame, field="Mot-Clef")
         self.keyW_frame.grid(row=3, column=3)
 
         # Frame parent Format
-        self.format_frame = filterFrame(self.filters_frame, field="Format")
+        self.format_frame = FilterFrame(self.filters_frame, field="Format")
         self.format_frame.grid(row=5, column=1)
 
         # Frame parent Bouton Lancement
@@ -145,8 +145,7 @@ class interface(Frame):  # Une classe qui hérite de la classe Frame
 # ########## Script #################
 # ##################################
 
-
 if __name__ == '__main__':
 
-    ui = interface()
+    ui = Interface()
     ui.mainloop()

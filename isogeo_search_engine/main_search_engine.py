@@ -14,8 +14,8 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 # ##### Modules ####################
-from api import api_client as api
-from ui import ui_objs as ui
+from api import IsogeoAPI as api
+from ui import Interface as ui
 
 # ############################################################################
 # ########## Log ###################
@@ -39,7 +39,7 @@ logger.info('Initialisation du fichier .log')
 # ##################################
 
 
-class isogeo_searchEngine(ui.interface, api.isogeo_API):
+class IsogeoSearchEngine(ui, api):
     """ Inhertited from ui_objs module's interface class and api_client module's isogeo_API class.
     Assemble the user interface and the API connection module and create a search engine.
     
@@ -48,8 +48,8 @@ class isogeo_searchEngine(ui.interface, api.isogeo_API):
 
     def __init__(self, auth_file_name: str = "client_secrets.json"):
         # ###### Attributes ########
-        api.isogeo_API.__init__(self, file_name = auth_file_name)
-        ui.interface.__init__(self)
+        api.__init__(self, file_name = auth_file_name)
+        ui.__init__(self)
 
         logger.info("Connexion a l'API.")
 
@@ -98,7 +98,7 @@ class isogeo_searchEngine(ui.interface, api.isogeo_API):
     def fields_setting(self, input_request: dict):
         """Populate combobox filter widgets with possible values.
 
-        :param * isogeo_API.requestMaker() * input_request: the request to API from wich the values are extracted.
+        :param dict input_request: the request to API's result (with IsogeoAPI.request_Maker() module) from wich the values are extracted.
         """
         for field in self.field_dict:
             field_values = []
@@ -167,9 +167,8 @@ class isogeo_searchEngine(ui.interface, api.isogeo_API):
 # ########## Script #################
 # ##################################
 
-
 if __name__ == '__main__':
 
-    search_engine = isogeo_searchEngine(auth_file_name="client_secrets.json")
+    search_engine = IsogeoSearchEngine(auth_file_name="client_secrets.json")
 
     search_engine.mainloop()

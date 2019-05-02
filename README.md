@@ -25,10 +25,10 @@ Dans le but d'atteindre les objectifs de formation, un **moteur de recherche** f
 * Installation du package isogeo-pysdk :
 
 ```powershell
-pip install isogeo-pysdk
+pip install -r requirement.txt
 ```
 
-* Importer les dossiers `api` et `ui` ainsi que le fichier `main_search_engine.py` et les stocker dans le **même répertoire**.
+* Cloner le dépôt localement.
 
 * Ajouter le **fichier `.json` d'authentification** Isogeo dans le dossier `api` (au même niveau que le fichier `api_client.py`).
 

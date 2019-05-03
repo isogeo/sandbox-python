@@ -14,8 +14,8 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 # ##### Modules ####################
-from api import IsogeoAPI as api
-from ui import Interface as ui
+from .api import IsogeoAPI
+from .ui import Interface
 
 # ############################################################################
 # ########## Log ###################
@@ -25,21 +25,21 @@ from ui import Interface as ui
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 # formatage des messages
-formatter = logging.Formatter('%(asctime)s :: %(levelname)s :: %(message)s')
+formatter = logging.Formatter("%(asctime)s :: %(levelname)s :: %(message)s")
 # paramétrage du fichier .log
-file_handler = RotatingFileHandler('isogeo_search_engine.log', 'a', 1000000, 1)
+file_handler = RotatingFileHandler("isogeo_search_engine.log", "a", 1000000, 1)
 file_handler.setLevel(logging.DEBUG)
 file_handler.setFormatter(formatter)
 # association du logger au fichier
 logger.addHandler(file_handler)
-logger.info('Initialisation du fichier .log')
+logger.info("Initialisation du fichier .log")
 
 # ############################################################################
 # ########## Class #################
 # ##################################
 
 
-class IsogeoSearchEngine(ui, api):
+class IsogeoSearchEngine(Interface, IsogeoAPI):
     """ Inhertited from ui_objs module's interface class and api_client module's isogeo_API class.
     Assemble the user interface and the API connection module and create a search engine.
     
@@ -48,8 +48,8 @@ class IsogeoSearchEngine(ui, api):
 
     def __init__(self, auth_file_name: str = "client_secrets.json"):
         # ###### Attributes ########
-        api.__init__(self, file_name = auth_file_name)
-        ui.__init__(self)
+        IsogeoAPI.__init__(self, file_name=auth_file_name)
+        Interface.__init__(self)
 
         logger.info("Connexion a l'API.")
 
@@ -61,17 +61,17 @@ class IsogeoSearchEngine(ui, api):
             self.grpTrav_frame.cbbox: "owners",
             self.type_frame.cbbox: "types",
             self.keyW_frame.cbbox: "keywords",
-            self.format_frame.cbbox: "formats"
+            self.format_frame.cbbox: "formats",
         }
         self.filter_output = {
             "providers": "",
             "owners": "",
             "types": "",
             "keywords": "",
-            "formats": ""
+            "formats": "",
         }
 
-        self.init_request = self.request_Maker(filter_request=0)
+        self.init_request = self.request_maker(filter_request=False)
         self.result = self.str_result
         self.query = ""
 
@@ -80,26 +80,38 @@ class IsogeoSearchEngine(ui, api):
         self.fields_setting(input_request=self.init_request)
         self.field_updating()
         self.reset_btn.config(command=self.global_resetting)
-        self.search_box.bind('<FocusOut>', self.free_searching)
+        self.search_box.bind("<FocusOut>", self.free_searching)
 
         self.master.quit()
 
-    def set_result(self, result: str):
+    def set_result(self, result: int):
         """Show the number of ressources resulting from the user's request at the bottom of the user interface.
         
         :param str result: result to show
         """
+        if not isinstance(result, int):
+            raise TypeError("'result' parameter must be an integer")
+
         if result > 1:
             self.result.set("{} métadonnées trouvées".format(result))
         else:
             self.result.set("{} métadonnée trouvée".format(result))
         logger.info("Affichage du resultat : {}.".format(result))
 
-    def fields_setting(self, input_request: dict):
+    def fields_setting(self, input_request: tuple):
         """Populate combobox filter widgets with possible values.
 
-        :param dict input_request: the request to API's result (with IsogeoAPI.request_Maker() module) from wich the values are extracted.
+        :param dict input_request: the request to API's result (with IsogeoAPI.request_maker() module) from wich the values are extracted.
         """
+        if not isinstance(input_request, tuple):
+            raise TypeError("'result' parameter must be a tuple")
+
+        if not isinstance(input_request[0], dict):
+            raise TypeError("'result' parameter must be a tuple(dict, int)")
+
+        if not isinstance(input_request[1], int):
+            raise TypeError("'result' parameter must be a tuple(dict, int)")
+
         for field in self.field_dict:
             field_values = []
             for value in input_request[0][self.field_dict[field]]:
@@ -108,24 +120,26 @@ class IsogeoSearchEngine(ui, api):
         logger.info("Remplissage des champs de filtre.")
 
     def set_query(self):
-        """Generate the character string used as value for * isogeo_API.request_Maker() * 'filter_query' parameter.
+        """Generate the character string used as value for * isogeo_API.request_maker() * 'filter_query' parameter.
         """
         self.query = ""
         self.query += "{} ".format(self.search_box.get())
         for output in self.filter_output:
-                self.query += "{} ".format(self.filter_output[output])
+            self.query += "{} ".format(self.filter_output[output])
 
-    def cbbox_callback(self, event: object, field: object):
+    def cbbox_callback(self, event, field: object):
         """Executed when the user interacts with a filter combobox.
         
-        :param str field: the filter involved in the interaction
+        :param object field: the ttk.combobox involved in the interaction
         """
         filter_name = self.field_dict[field]
         dict_values = self.init_request[0][filter_name]
-        self.filter_output[filter_name] = dict_values[event.widget.get()]
+        self.filter_output[filter_name] = dict_values[field.get()]
 
         self.set_query()
-        update_request = self.request_Maker(filter_request=1, filter_query=self.query)
+        update_request = self.request_maker(
+            filter_request=True, filter_query=self.query
+        )
         logger.info("Requête à l'API : ")
 
         self.set_result(result=update_request[1])
@@ -136,9 +150,11 @@ class IsogeoSearchEngine(ui, api):
         """Update the filter comboboxes values and the result label value when the user interacts with filter comboboxes.
         """
         for field in self.field_dict:
+
             def cbbox_callback_arg(event, field=field):
                 return self.cbbox_callback(event, field)
-            field.bind('<<ComboboxSelected>>', cbbox_callback_arg)
+
+            field.bind("<<ComboboxSelected>>", cbbox_callback_arg)
 
     def global_resetting(self):
         """Reset filter comboboxes values and the result label value when the user presses the reset button.
@@ -147,7 +163,7 @@ class IsogeoSearchEngine(ui, api):
         for field in self.field_dict:
             field.set("")
             self.filter_output[self.field_dict[field]] = ""
-        self.init_request = self.request_Maker(filter_request=0)
+        self.init_request = self.request_maker(filter_request=False)
         self.fields_setting(input_request=self.init_request)
         self.set_result(result=self.init_request[1])
         logger.info("Reset global de la valeur des champs")
@@ -157,17 +173,19 @@ class IsogeoSearchEngine(ui, api):
         """
         self.set_query()
         self.str_result.set(self.query)
-        update_request = self.request_Maker(
-            filter_request=1, filter_query=self.query)
+        update_request = self.request_maker(
+            filter_request=True, filter_query=self.query
+        )
         self.set_result(result=update_request[1])
         self.fields_setting(input_request=update_request)
         logger.info("Interraction avec la barre de recherche")
+
 
 # ############################################################################
 # ########## Script #################
 # ##################################
 
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     search_engine = IsogeoSearchEngine(auth_file_name="client_secrets.json")
 

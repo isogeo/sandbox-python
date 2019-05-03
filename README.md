@@ -37,7 +37,7 @@ pip install isogeo-pysdk
 ```python
 # Import du module permettant de connecter l'interface utilisateur et l'API Isogeo
 # (donne également accès aux modules api_client, ui_objs et tkinter)
-from main_search_engine import *
+from isogeo_search_engine import IsogeoSearchEngine
 
 # Générer le moteur de recherche connecté à l'API via le fichier json d'authentification
 # (Création d'une instance de la classe "IsogeoSearchEngine" du module main_search_engine)

@@ -4,11 +4,10 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+Sphinx = "==2.*"
 
 [packages]
-isogeo-pysdk = "==2.21"
-
-Sphinx = "==2.0.1"
+isogeo-pysdk = "==2.21.*"
 
 [requires]
 python_version = "3.6"

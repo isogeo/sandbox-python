@@ -48,13 +48,11 @@ class IsogeoSearchEngine(ui, api):
 
     def __init__(self, auth_file_name: str = "client_secrets.json"):
         # ###### Attributes ########
-        api.__init__(self, file_name = auth_file_name)
         ui.__init__(self)
+        api.__init__(self, file_name = auth_file_name)
 
         logger.info("Connexion a l'API.")
-
-        self.isogeo.get_app_properties(self.token)
-        self.master.title(self.isogeo.app_properties.get("name"))
+        self.master.title(self.isogeo.app_properties.name)
 
         self.field_dict = {
             self.fourn_frame.cbbox: "providers",
@@ -71,7 +69,7 @@ class IsogeoSearchEngine(ui, api):
             "formats": ""
         }
 
-        self.init_request = self.request_Maker(filter_request=0)
+        self.init_request = self.request_maker(filter_request=0)
         self.result = self.str_result
         self.query = ""
 
@@ -98,7 +96,7 @@ class IsogeoSearchEngine(ui, api):
     def fields_setting(self, input_request: dict):
         """Populate combobox filter widgets with possible values.
 
-        :param dict input_request: the request to API's result (with IsogeoAPI.request_Maker() module) from wich the values are extracted.
+        :param dict input_request: the request to API's result (with IsogeoAPI.request_maker() module) from wich the values are extracted.
         """
         for field in self.field_dict:
             field_values = []
@@ -108,7 +106,7 @@ class IsogeoSearchEngine(ui, api):
         logger.info("Remplissage des champs de filtre.")
 
     def set_query(self):
-        """Generate the character string used as value for * isogeo_API.request_Maker() * 'filter_query' parameter.
+        """Generate the character string used as value for * isogeo_API.request_maker() * 'filter_query' parameter.
         """
         self.query = ""
         self.query += "{} ".format(self.search_box.get())
@@ -125,7 +123,7 @@ class IsogeoSearchEngine(ui, api):
         self.filter_output[filter_name] = dict_values[event.widget.get()]
 
         self.set_query()
-        update_request = self.request_Maker(filter_request=1, filter_query=self.query)
+        update_request = self.request_maker(filter_request=1, filter_query=self.query)
         logger.info("Requête à l'API : ")
 
         self.set_result(result=update_request[1])
@@ -147,7 +145,7 @@ class IsogeoSearchEngine(ui, api):
         for field in self.field_dict:
             field.set("")
             self.filter_output[self.field_dict[field]] = ""
-        self.init_request = self.request_Maker(filter_request=0)
+        self.init_request = self.request_maker(filter_request=0)
         self.fields_setting(input_request=self.init_request)
         self.set_result(result=self.init_request[1])
         logger.info("Reset global de la valeur des champs")
@@ -157,7 +155,7 @@ class IsogeoSearchEngine(ui, api):
         """
         self.set_query()
         self.str_result.set(self.query)
-        update_request = self.request_Maker(
+        update_request = self.request_maker(
             filter_request=1, filter_query=self.query)
         self.set_result(result=update_request[1])
         self.fields_setting(input_request=update_request)
@@ -169,6 +167,6 @@ class IsogeoSearchEngine(ui, api):
 
 if __name__ == '__main__':
 
-    search_engine = IsogeoSearchEngine(auth_file_name="client_secrets.json")
+    search_engine = IsogeoSearchEngine()
 
     search_engine.mainloop()

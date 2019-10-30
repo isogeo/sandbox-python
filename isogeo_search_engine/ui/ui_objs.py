@@ -9,7 +9,7 @@
 # ##################################
 
 # Standard library
-from tkinter import *
+from tkinter import Frame, Button, StringVar, Entry, Label
 from tkinter import ttk
 
 # #############################################################################
@@ -47,7 +47,7 @@ class Interface(Frame):  # Une classe qui hérite de la classe Frame
     Generate the search_engine's user interface. 
     """
 
-    def __init__(self, master: object = None) -> object:
+    def __init__(self, master: object = None):
         super().__init__(master, width="13c", height="12c")
         self.grid_propagate(0)
         self.pack()

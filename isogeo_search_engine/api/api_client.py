@@ -39,12 +39,17 @@ class IsogeoAPI():  # Une classe qui hérite de la classe Isogeo
         self.client_secret = utils.credentials_loader(
             self.json_file).get("client_secret")
         # connexion à l'API et récupération du token
-        self.isogeo = Isogeo(client_id=self.client_id,
-                            client_secret=self.client_secret)
-        self.token = self.isogeo.connect()
+        self.isogeo = Isogeo(
+            client_id=self.client_id,
+            client_secret=self.client_secret,
+            auth_mode = "group",
+            auto_refresh_url = "https://id.api.isogeo.com/oauth/token",
+            platform="prod"
+            )
+        self.isogeo.connect()
 
     # Méthode permettant d'effectuer les différents types de requête à l'API
-    def request_Maker(self, filter_request: bool = 0, filter_query: str = None) -> dict:
+    def request_maker(self, filter_request: bool = 0, filter_query: str = None) -> dict:
         """Request API about the resources shared with the application wich credential file allow access.
         Using a method of isogeo_pysdk's Isogeo class to return the number and the tags of searched resources.
 
@@ -53,9 +58,9 @@ class IsogeoAPI():  # Une classe qui hérite de la classe Isogeo
         """
         if filter_request == 1:
             search = self.isogeo.search(
-                whole_share=0, page_size=0, augment=0, tags_as_dicts=1, query=filter_query)
+                page_size=0, augment=0, tags_as_dicts=1, query=filter_query)
         else:
             search = self.isogeo.search(
-                whole_share=0, page_size=0, augment=0, tags_as_dicts=1)
+                page_size=0, augment=0, tags_as_dicts=1)
         # retourne les valeurs des champs ainsi que le nombre de métadonnées filtrées
-        return search.get("tags"), search.get("total")
+        return search.tags, search.total

@@ -25,7 +25,7 @@ from ui import Interface as ui
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 # formatage des messages
-formatter = logging.Formatter('%(asctime)s :: %(levelname)s :: %(message)s')
+formatter = logging.Formatter('%(asctime)s :: %(levelname)s :: %(module)s - %(lineno)d :: %(message)s')
 # paramétrage du fichier .log
 file_handler = RotatingFileHandler('isogeo_search_engine.log', 'a', 1000000, 1)
 file_handler.setLevel(logging.DEBUG)
@@ -166,7 +166,12 @@ class IsogeoSearchEngine(ui, api):
 # ##################################
 
 if __name__ == '__main__':
+    
+    logger.info("*=====*")
 
-    search_engine = IsogeoSearchEngine()
-
-    search_engine.mainloop()
+    try:
+        logger.info("*=====* trying to display the app")
+        search_engine = IsogeoSearchEngine()
+        search_engine.mainloop()
+    except Exception as e:
+        logger.info("*=====* {}".format(e))
